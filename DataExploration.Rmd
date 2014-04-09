@@ -1,0 +1,7 @@
+
+First I did something.
+
+```{r, results='markup'}
+summary(train$feat1)
+```
+
