@@ -1,7 +1,37 @@
 
-First I did something.
+```{r, eval=FALSE}
+unique(sapply(train, class)) # all variables are either numeric or integer
 
-```{r, results='markup'}
-summary(train$feat1)
+mylengths <- sapply(train, function(x) length(unique(x)))
+mylengths[mylengths<20]
+
+mymissing <- sapply(train, function(x) sum(is.na(x)))
+mylengths[mylengths<20 & mymissing>0]
 ```
+
+All of the data is read in as either numeric or integer data, but some of the variables have low cardinality, suggesting they might be better treated as nominal or ordinal data. Several features had only one value (*feat47*, *feat48*, *feat49*, *feat50*, and *feat51*). Since these do not provide any information about the target, I deleted them. 
+
+```{r}
+train[, feat47:=NULL]
+train[, feat48:=NULL]
+train[, feat49:=NULL]
+train[, feat50:=NULL]
+train[, feat51:=NULL]
+```
+
+I noticed that *feat2* is potentially left-censored; there are many 0 values and a continuum of values above that.
+
+```{r}
+library(reshape2)
+train.melt <- melt(train, id.var='exampleid') 
+ggplot(train.melt, aes(x=value))+
+  facet_wrap(~variable, scales='free_x')+
+  geom_bar()
+
+train.melt <- melt(train, id.vars=c('exampleid', 'target')) 
+ggplot(train.melt, aes(x=value, fill=factor(target)))+
+  facet_wrap(~variable, scales='free_x')+
+  geom_bar()
+```
+
 
