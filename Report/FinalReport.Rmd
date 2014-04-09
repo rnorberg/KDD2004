@@ -1,0 +1,82 @@
+# STA 6714 Final Project
+
+Author: Robert Norberg
+
+Due: April 23, 2014
+
+Date Ran: `r format(Sys.Date(), '%B %d, %Y')`
+
+----
+
+```{r ChunkSettings, echo=FALSE, warning=FALSE, cache=FALSE, message=FALSE, results='hide'}
+# Clear working environment
+rm(list=ls())
+
+# Options for document compilation
+opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, comment=NA, fig.height=8, fig.width=7, fig.cap='', results='hide')
+
+# Set table options for neat tables
+panderOptions('table.split.table', 120)
+panderOptions('table.split.cells', 30)
+
+# Globally set plot parameters
+library(ggplot2)
+theme_set(theme_bw(base_size=18))
+theme_update(panel.grid.major=element_line(colour="#CCCCCC", size=0.3), panel.grid.minor=element_line(colour="grey96", size=0.7))
+```
+
+```{r InfileData, cache=TRUE}
+library(data.table)
+train <- fread('Data/WANGphy_train.csv')
+```
+
+## Executive Summary (1 Page) 
+
+
+## Data Preparation
+
+### Exploration
+
+### Missing Values Indicators and MVP
+
+### Missing Value Imputation 
+
+### Transformations 
+
+### Outliers 
+
+## Model Building
+
+## Model Performance 
+
+### Model performance evaluation 
+
+#### ROC curve
+
+#### c statistics
+
+#### Validation Sum Squares
+
+### Variable Importance 
+
+### Variable Impact to the Target Variable 
+
+## Conclusions 
+
+-----
+
+## Works Cited
+
+```{r, results='asis'}
+# Create bibliography to cite packages used
+allLibs <- .packages()
+write.bib(allLibs, file="Appendix.bib")
+read.bib("Appendix.bib")
+```
+
+-----
+
+## Appendix with R code
+
+```{r all-code, ref.label=all_labels(), echo=TRUE, eval=FALSE, tidy.opts=list(keep.blank.line=T)}
+```
