@@ -1,0 +1,22 @@
+```{r}
+mymissing <- sapply(train, function(x) 100*sum(is.na(x))/length(x)) # only 8 variables with missing
+mymissing <- mymissing[mymissing>0]
+write.csv(mymissing, file='C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Missing.csv')
+```
+
+There are only 8 variables in the data set with truly missing data. Surprisingly there are only 8 patterns of missingness, suggesting the data are not missing at random. Indeed, those rows with missing values for **feat20** are also missing **feat21** and **feat22**. Similarly, **feat44**, **feat45**, and **feat46** are missing values in the same rows. A table summarizing missing values is presented in Appendix 1. Having a missing value indicator for each of the 8 variables with missing values would increase the number of predictors to be considered by 8. Using 7 dummy variables to represent the 8 missing value patterns will reduce that by one, so I choose to represent missingness in this manner.
+
+```{r, error=FALSE}
+# create missing value indicators
+train[, Mfeat20:=as.numeric(is.na(feat20))]
+train[, Mfeat29:=as.numeric(is.na(feat29))]
+train[, Mfeat44:=as.numeric(is.na(feat44))]
+train[, Mfeat55:=as.numeric(is.na(feat55))]
+
+train$MVP <- factor(with(train, paste0(Mfeat20, Mfeat29, Mfeat44, Mfeat55)))
+
+train[, Mfeat20:=NULL]
+train[, Mfeat29:=NULL]
+train[, Mfeat44:=NULL]
+train[, Mfeat55:=NULL]
+```

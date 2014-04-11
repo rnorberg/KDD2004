@@ -59,12 +59,7 @@ The percentage of zeros in each variable is presented in Appendix 1.
 
 ```{r}
 myzeros <- round(sapply(train, function(x) 100*sum(x==0)/length(x)), 1)
-mytable <- data.frame(dat=paste0(myzeros, '%'))
-mytable$dat <- as.character(mytable$dat)
-mytable$dat[mytable$dat=='NA%'] <- 'N/A'
-names(mytable) <- "% 0's"
-row.names(mytable) <- names(myzeros)
-write.csv(mytable, file='C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Zeros.csv')
+write.csv(myzeros, file='C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Zeros.csv')
 ```
 
 I suspect that many of the variables are censored and 0 is used to represent "greater than the detection limit" or "less than the detection limit" or something similar. Censored data is a common phenomenon in biological data. Survival analysis typically deals with right censored data because the lifespan of organisms still living at the end of the study period is partially unknown. Analysis of chemical concentrations often deals with left censored data because when the concentration of a chemical drops below a certain point the lab can no longer detect it. 
@@ -76,51 +71,4 @@ ggplot(train, aes(x=feat44, fill=target))+
   geom_bar()
 ```
 
-
-```{r}
-# take only those where target=1
-tmp <- train[target==0 & !is.na(feat44), list(exampleid, target, feat44)]
-ggplot(tmp, aes(x=feat44, fill=target))+
-  geom_bar()+
-  ggtitle('Before Imputation')+
-  guides(fill=F)
-
-library(NADA)
-test <- cenfit(obs=tmp[,feat44], censored=tmp[,feat44==0])
-mymean <- mean(test)['mean'] # estimated mean
-mymin <- tmp[feat44!=0, min(feat44)] # min with 0's removed
-mydiff <- abs(mymean-mymin) # mean - min
-myn <- sum(tmp$feat44==0) # how many values to bootstrap
-mysamp <- sample(tmp[feat44>=(mymean+mydiff), feat44], myn, replace=T) # sample the right side of my distribution
-myimp <- mymean-abs(mymean-mysamp) # flip sample values over the mean
-tmp[, Ifeat44:=F]
-tmp[feat44==0, Ifeat44:=T] # mark those I am about to replace with imputed values
-tmp[feat44==0, feat44:=myimp] # replace 0's with values
-
-ggplot(tmp, aes(x=feat44, fill=Ifeat44))+
-  geom_bar()+
-  geom_vline(xintercept=mymin)+
-  ggtitle('After Imputation')+
-  guides(fill=F)
-```
-
-
-
-The variables I consider possibly left censored are **feat10**, **feat34**, **feat44**, **feat46**, **feat59**, **feat60**, **feat65**, **feat73**, **feat77**
-
-Those that are possibly right-censored are **feat26**, **feat27**, **feat28**, **feat45**, **feat53**, **feat54**, **feat61**, **feat67**, **feat78**, 
-
-Some variables also look to be censored on both the left and right side. These are **feat3**, **feat68**, 
-
-Others that may be censored in some other way are **feat11**, **feat13**, **feat14**, **feat15**, **feat20**, **feat21**, **feat37**, **feat38**, **feat39**, **feat40**, **feat41**, **feat42**, **feat62**, **feat63**, **feat72**, **feat74**
-
-```{r}
-ggplot(train, aes(x=feat26, fill=target))+
-  geom_bar()
-
-ggplot(train[feat3!=0, ], aes(x=feat3, fill=target))+
-  geom_bar(binwidth=0.01)
-```
-
-
-
+I will treat these 0's as potentially missing data. 

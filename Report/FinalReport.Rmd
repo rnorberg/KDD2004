@@ -44,7 +44,13 @@ train <- fread('C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Data/WANGp
 
 ### Missing Values Indicators and MVP
 
+```{r child='C:/Users/Robert/cloud/Classes/Data Prep/Final Project/MissingValuePattern.Rmd'}
+```
+
 ### Missing Value Imputation 
+
+```{r child='C:/Users/Robert/cloud/Classes/Data Prep/Final Project/MissingValueImputation.Rmd'}
+```
 
 ### Transformations 
 
@@ -74,15 +80,26 @@ train <- fread('C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Data/WANGp
 
 ### Tables
 
-```{r, results='asis'}
+```{r, results='hide'}
 zerotable <- fread('C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Zeros.csv')
-
 zerotable <- zerotable[, x:=paste0(x, '%')]
 zerotable <- zerotable[x=='NA%', x:='N/A']
 setnames(zerotable, c('Variable', "% 0's"))
+```
 
+```{r, results='asis'}
 pander(zerotable)
 ```
+
+```{r}
+misstable <- fread('C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Missing.csv')
+setnames(misstable, c('Variable', '% Missing'))
+```
+
+```{r, results='asis'}
+pander(misstable)
+```
+
 
 
 ### Works Cited
