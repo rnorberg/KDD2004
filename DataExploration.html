@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="x-ua-compatible" content="IE=9" >
 
-<title>STA 6714 Final Project</title>
+<title></title>
 
 <style type="text/css">
 body, td {
@@ -179,285 +179,212 @@ hljs.initHighlightingOnLoad();
 </head>
 
 <body>
-<h1>STA 6714 Final Project</h1>
-
-<p>Author: Robert Norberg</p>
-
-<p>Due: April 23, 2014</p>
-
-<p>Date Ran: April 09, 2014</p>
-
-<hr/>
-
-<h2>Executive Summary (1 Page)</h2>
-
-<h2>Data Preparation</h2>
-
-<h3>Exploration</h3>
-
-<p>All of the data is read in as either numeric or integer data, but some of the variables have low cardinality, suggesting they might be better treated as nominal or ordinal data. Several features had only one value (<em>feat47</em>, <em>feat48</em>, <em>feat49</em>, <em>feat50</em>, and <em>feat51</em>). Since these do not provide any information about the target, I deleted them. </p>
-
-<p>I decided to treat any variable with a cardinality of 2 as a nominal variable and those with a cardinality of 10 or less as an ordinal variable. </p>
-
-<p>The variables effected are summarized in the table below.</p>
-
-<table><thead>
-<tr>
-<th align="center">&nbsp;</th>
-<th align="center">Cardinality</th>
-<th align="center">Class</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="center"><strong>feat4</strong></td>
-<td align="center">3</td>
-<td align="center">Ordinal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat8</strong></td>
-<td align="center">3</td>
-<td align="center">Ordinal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat12</strong></td>
-<td align="center">3</td>
-<td align="center">Ordinal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat17</strong></td>
-<td align="center">5</td>
-<td align="center">Ordinal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat29</strong></td>
-<td align="center">2</td>
-<td align="center">Nominal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat30</strong></td>
-<td align="center">2</td>
-<td align="center">Nominal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat31</strong></td>
-<td align="center">3</td>
-<td align="center">Ordinal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat35</strong></td>
-<td align="center">2</td>
-<td align="center">Nominal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat36</strong></td>
-<td align="center">2</td>
-<td align="center">Nominal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat43</strong></td>
-<td align="center">2</td>
-<td align="center">Nominal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat52</strong></td>
-<td align="center">2</td>
-<td align="center">Nominal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat55</strong></td>
-<td align="center">2</td>
-<td align="center">Nominal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat56</strong></td>
-<td align="center">3</td>
-<td align="center">Ordinal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat66</strong></td>
-<td align="center">3</td>
-<td align="center">Ordinal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat69</strong></td>
-<td align="center">3</td>
-<td align="center">Ordinal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat75</strong></td>
-<td align="center">3</td>
-<td align="center">Ordinal</td>
-</tr>
-<tr>
-<td align="center"><strong>feat76</strong></td>
-<td align="center">4</td>
-<td align="center">Ordinal</td>
-</tr>
-</tbody></table>
-
-<p>I noticed several variables that had a very large number of 0 values. It seems that in some cases variables were given a value of 0 instead of a missing value. Take for example <strong>feat26</strong> whose distribution is shown below.</p>
-
-<p><img src="C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Figures/Exploratory/feat26.png" alt="Distribution of feat26"/></p>
-
-<p>Other variables </p>
-
-<h3>Missing Values Indicators and MVP</h3>
-
-<h3>Missing Value Imputation</h3>
-
-<h3>Transformations</h3>
-
-<h3>Outliers</h3>
-
-<h2>Model Building</h2>
-
-<h2>Model Performance</h2>
-
-<h3>Model performance evaluation</h3>
-
-<h4>ROC curve</h4>
-
-<h4>c statistics</h4>
-
-<h4>Validation Sum Squares</h4>
-
-<h3>Variable Importance</h3>
-
-<h3>Variable Impact to the Target Variable</h3>
-
-<h2>Conclusions</h2>
-
-<hr/>
-
-<h2>Works Cited</h2>
-
-<p>Dowle M, Short T, Srinivasan SLwcfA and Saporta R (2013).
-<em>data.table: Extension of data.frame for fast indexing, fast
-ordered joins, fast assignment, fast grouping and list columns.</em>.
-R package version 1.8.10, <URL:
-http://CRAN.R-project.org/package=data.table>.</p>
-
-<p>Wickham H (2009). <em>ggplot2: elegant graphics for data analysis</em>.
-Springer New York. ISBN 978-0-387-98140-6, <URL:
-http://had.co.nz/ggplot2/book>.</p>
-
-<p>Dar<U+663C><U+3E33>czi G (2013). <em>pander: An R Pandoc Writer</em>. R
-package version 0.3.8, <URL:
-http://cran.r-project.org/package=pander>.</p>
-
-<p>Andrew A, Zvoleff A, Diggs B, Pereira C, Wickham H, Jeon H, Arnold
-J, Stephens J, Hester J, Cheng J, Keane J, Allaire J, Toloe J,
-Takahashi K, Kuhlmann M, Caballero N, Salkowski N, Ross N,
-Vaidyanathan R, Cotton R, Francois R, Brouwer S, Bernard Sd, Wei
-T, Lamadon T, Torsney-Weir T, Davis T, Zhu W, Wu W and Xie Y
-(2013). <em>knitr: A general-purpose package for dynamic report
-generation in R</em>. R package version 1.5, <URL:
-http://yihui.name/knitr/>.</p>
-
-<p>Xie Y (2013). <em>Dynamic Documents with R and knitr</em>. Chapman and
-Hall/CRC. ISBN 978-1482203530, <URL: http://yihui.name/knitr/>.</p>
-
-<p>Xie Y (2013). &ldquo;knitr: A Comprehensive Tool for Reproducible
-Research in R.&rdquo; In Stodden V, Leisch F and Peng RD (eds.),
-<em>Implementing Reproducible Computational Research</em>. Chapman and
-Hall/CRC. ISBN 978-1466561595, <URL:
-http://www.crcpress.com/product/isbn/9781466561595>.</p>
-
-<p>R Core Team (2013). <em>R: A Language and Environment for Statistical
-Computing</em>. R Foundation for Statistical Computing, Vienna,
-Austria. <URL: http://www.R-project.org/>.</p>
-
-<p>R Core Team (2013). <em>R: A Language and Environment for Statistical
-Computing</em>. R Foundation for Statistical Computing, Vienna,
-Austria. <URL: http://www.R-project.org/>.</p>
-
-<p>R Core Team (2013). <em>R: A Language and Environment for Statistical
-Computing</em>. R Foundation for Statistical Computing, Vienna,
-Austria. <URL: http://www.R-project.org/>.</p>
-
-<p>R Core Team (2013). <em>R: A Language and Environment for Statistical
-Computing</em>. R Foundation for Statistical Computing, Vienna,
-Austria. <URL: http://www.R-project.org/>.</p>
-
-<p>R Core Team (2013). <em>R: A Language and Environment for Statistical
-Computing</em>. R Foundation for Statistical Computing, Vienna,
-Austria. <URL: http://www.R-project.org/>.</p>
-
-<p>R Core Team (2013). <em>R: A Language and Environment for Statistical
-Computing</em>. R Foundation for Statistical Computing, Vienna,
-Austria. <URL: http://www.R-project.org/>.</p>
-
-<p>R Core Team (2013). <em>R: A Language and Environment for Statistical
-Computing</em>. R Foundation for Statistical Computing, Vienna,
-Austria. <URL: http://www.R-project.org/>.</p>
-
-<hr/>
-
-<h2>Appendix with R code</h2>
-
-<pre><code class="r"># Clear working environment
-rm(list = ls())
-
-# Options for document compilation
-opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, comment = NA, 
-    fig.height = 8, fig.width = 7, fig.cap = &quot;&quot;, results = &quot;hide&quot;)
-
-# Set table options for neat tables
-library(pander)
-panderOptions(&quot;table.split.table&quot;, 120)
-panderOptions(&quot;table.split.cells&quot;, 30)
-
-# Globally set plot parameters
-library(ggplot2)
-theme_set(theme_bw(base_size = 18))
-theme_update(panel.grid.major = element_line(colour = &quot;#CCCCCC&quot;, size = 0.3), 
-    panel.grid.minor = element_line(colour = &quot;grey96&quot;, size = 0.7))
-
-library(data.table)
-train &lt;- fread(&quot;C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Data/WANGphy_train.csv&quot;)
-# Create bibliography to cite packages used
-allLibs &lt;- .packages()
-library(knitcitations)
-write.bib(allLibs, file = &quot;Appendix.bib&quot;)
-read.bib(&quot;Appendix.bib&quot;)
-unique(sapply(train, class))  # all variables are either numeric or integer
+<pre><code class="r">unique(sapply(train, class))  # all variables are either numeric or integer
 
 mylengths &lt;- sapply(train, function(x) length(unique(x)))
 mylengths[mylengths &lt; 20]
-train[, `:=`(feat47, NULL)]
-train[, `:=`(feat48, NULL)]
-train[, `:=`(feat49, NULL)]
-train[, `:=`(feat50, NULL)]
-train[, `:=`(feat51, NULL)]
-train[, `:=`(target, factor(target))]
-train[, `:=`(feat4, ordered(feat4))]
-train[, `:=`(feat8, ordered(feat8))]
-train[, `:=`(feat12, ordered(feat12))]
-train[, `:=`(feat16, ordered(feat16))]
-train[, `:=`(feat17, ordered(feat17))]
-train[, `:=`(feat29, factor(feat29))]
-train[, `:=`(feat30, factor(feat30))]
-train[, `:=`(feat31, ordered(feat31))]
-train[, `:=`(feat35, factor(feat35))]
-train[, `:=`(feat36, factor(feat36))]
-train[, `:=`(feat43, factor(feat43))]
-train[, `:=`(feat52, factor(feat52))]
-train[, `:=`(feat55, factor(feat55))]
-train[, `:=`(feat56, ordered(feat56))]
-train[, `:=`(feat66, ordered(feat66))]
-train[, `:=`(feat69, ordered(feat69))]
-train[, `:=`(feat75, ordered(feat75))]
-train[, `:=`(feat76, ordered(feat76))]
-mylengths &lt;- sapply(train, function(x) length(unique(x)))
-
-varsEffected &lt;- names(train)[mylengths &lt; 10]
-varsEffected &lt;- varsEffected[varsEffected != &quot;target&quot;]
-
-mytable &lt;- data.frame(Cardinality = mylengths[varsEffected])
-mytable$Class &lt;- with(mytable, ifelse(Cardinality == 2, &quot;Nominal&quot;, &quot;Ordinal&quot;))
-library(pander)
-pander(mytable, style = &quot;rmarkdown&quot;)
 </code></pre>
+
+<p>All of the data is read in as either numeric or integer data, but some of the variables have low cardinality, suggesting they might be better treated as nominal or ordinal data. Several features had only one value (<em>feat47</em>, <em>feat48</em>, <em>feat49</em>, <em>feat50</em>, and <em>feat51</em>). Since these do not provide any information about the target, I deleted them. </p>
+
+<pre><code class="r">train[, `:=`(feat47, NULL)]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat48, NULL)]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat49, NULL)]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat50, NULL)]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat51, NULL)]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<p>I decided to treat any variable with a cardinality of 2 as a nominal variable and those with a cardinality of 10 or less as an ordinal variable. </p>
+
+<pre><code class="r">train[, `:=`(target, factor(target))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat4, ordered(feat4))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat8, ordered(feat8))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat12, ordered(feat12))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat16, ordered(feat16))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat17, ordered(feat17))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat29, factor(feat29))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat30, factor(feat30))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat31, ordered(feat31))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat35, factor(feat35))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat36, factor(feat36))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat43, factor(feat43))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat52, factor(feat52))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat55, factor(feat55))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat56, ordered(feat56))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat66, ordered(feat66))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat69, ordered(feat69))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat75, ordered(feat75))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">train[, `:=`(feat76, ordered(feat76))]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<p>The variables effected are summarized in the table below.</p>
+
+<pre><code class="r">mylengths &lt;- sapply(train, function(x) length(unique(x)))
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">
+varsEffected &lt;- names(train)[mylengths &lt; 10]
+</code></pre>
+
+<pre><code>## Error: object &#39;train&#39; not found
+</code></pre>
+
+<pre><code class="r">varsEffected &lt;- varsEffected[varsEffected != &quot;target&quot;]
+</code></pre>
+
+<pre><code>## Error: object &#39;varsEffected&#39; not found
+</code></pre>
+
+<pre><code class="r">
+mytable &lt;- data.frame(Cardinality = mylengths[varsEffected])
+</code></pre>
+
+<pre><code>## Error: object &#39;mylengths&#39; not found
+</code></pre>
+
+<pre><code class="r">mytable$Class &lt;- with(mytable, ifelse(Cardinality == 2, &quot;Nominal&quot;, &quot;Ordinal&quot;))
+</code></pre>
+
+<pre><code>## Error: object &#39;mytable&#39; not found
+</code></pre>
+
+<pre><code class="r">library(pander)
+</code></pre>
+
+<pre><code>## 
+## Attaching package: &#39;pander&#39;
+## 
+## The following object is masked from &#39;package:knitr&#39;:
+## 
+##     pandoc
+</code></pre>
+
+<pre><code class="r">pander(mytable, style = &quot;rmarkdown&quot;)
+</code></pre>
+
+<pre><code>## Error: object &#39;mytable&#39; not found
+</code></pre>
+
+<p>I noticed several places where the data were potentially censored. </p>
 
 </body>
 

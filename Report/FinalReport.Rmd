@@ -24,10 +24,11 @@ panderOptions('table.split.cells', 30)
 library(ggplot2)
 theme_set(theme_bw(base_size=18))
 theme_update(panel.grid.major=element_line(colour="#CCCCCC", size=0.3), panel.grid.minor=element_line(colour="grey96", size=0.7))
+
+library(data.table)
 ```
 
 ```{r InfileData, cache=TRUE}
-library(data.table)
 train <- fread('C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Data/WANGphy_train.csv')
 ```
 
@@ -69,7 +70,22 @@ train <- fread('C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Data/WANGp
 
 -----
 
-## Works Cited
+## Appendices
+
+### Tables
+
+```{r, results='asis'}
+zerotable <- fread('C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Zeros.csv')
+
+zerotable <- zerotable[, x:=paste0(x, '%')]
+zerotable <- zerotable[x=='NA%', x:='N/A']
+setnames(zerotable, c('Variable', "% 0's"))
+
+pander(zerotable)
+```
+
+
+### Works Cited
 
 ```{r, results='asis'}
 # Create bibliography to cite packages used
@@ -81,7 +97,7 @@ read.bib("Appendix.bib")
 
 -----
 
-## Appendix with R code
+### R code
 
 ```{r all-code, ref.label=all_labels(), echo=TRUE, eval=FALSE, tidy.opts=list(keep.blank.line=T)}
 ```
