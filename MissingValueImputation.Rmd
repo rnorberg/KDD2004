@@ -1,9 +1,34 @@
+The first task is to impute the actual missing values. I employ regression trees to impute each of the missing variables.
+
+```{r, cache=TRUE}
+library(party)
+library(survival)
+
+traintmp <- train[, exampleid:=NULL]
+mytree20 <- ctree(feat20~., data=traintmp[!is.na(feat20), ])
+train[, Ifeat20:=feat20]
+train[is.na(Ifeat20), Ifeat20:=predict(mytree20, newdata=train[is.na(feat20),])]
+
+mytree21 <- ctree(feat21~., data=traintmp[!is.na(feat21), ])
+train[, Ifeat21:=feat21]
+train[is.na(Ifeat21), Ifeat21:=predict(mytree21, newdata=train[is.na(feat21),])]
+
+mytree22 <- ctree(feat22~., data=traintmp[!is.na(feat22), ])
+train[, Ifeat22:=is.na(feat22)]
+train[is.na(feat22), feat22:=predict(mytree22, newdata=train[is.na(feat22),])]
+
+library(reshape2)
+tmp <- melt(train[!is.na(feat22), ], id.vars=c('exampleid', 'feat22'))
+ggplot(tmp, aes(x=value, y=feat22, group=variable))+
+  facet_wrap(~variable)+
+  geom_smooth()
+```
 
 
 ```{r}
 # take only those where target=1
 tmp <- train[target==0 & !is.na(feat44), list(exampleid, target, feat44)]
-ggplot(tmp, aes(x=feat44, fill=target))+
+ggplot(tmp, aes(x=feat44, fill=(feat44==0)))+
   geom_bar()+
   ggtitle('Before Imputation')+
   guides(fill=F)

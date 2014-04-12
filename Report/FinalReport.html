@@ -185,7 +185,7 @@ hljs.initHighlightingOnLoad();
 
 <p>Due: April 23, 2014</p>
 
-<p>Date Ran: April 09, 2014</p>
+<p>Date Ran: April 11, 2014</p>
 
 <hr/>
 
@@ -295,15 +295,33 @@ hljs.initHighlightingOnLoad();
 </tr>
 </tbody></table>
 
-<p>I noticed several variables that had a very large number of 0 values. It seems that in some cases variables were given a value of 0 instead of a missing value. Take for example <strong>feat26</strong> whose distribution is shown below.</p>
+<p>I noticed several variables that had a very large number of 0 values. It seems that a 0 value has some special significance for many of the variables.</p>
 
-<p><img src="C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Figures/Exploratory/feat26.png" alt="Distribution of feat26"/></p>
+<p>The percentage of zeros in each variable is presented in Appendix 1.</p>
 
-<p>Other variables </p>
+<p>I suspect that many of the variables are censored and 0 is used to represent &ldquo;greater than the detection limit&rdquo; or &ldquo;less than the detection limit&rdquo; or something similar. Censored data is a common phenomenon in biological data. Survival analysis typically deals with right censored data because the lifespan of organisms still living at the end of the study period is partially unknown. Analysis of chemical concentrations often deals with left censored data because when the concentration of a chemical drops below a certain point the lab can no longer detect it. </p>
+
+<p>Take for example a plot of <strong>feat44</strong>. This looks like a classic case of left-censored data. </p>
+
+<p><img src="data:image/png;base64,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" alt=""/> </p>
+
+<p>I will treat these 0&#39;s as potentially missing data. </p>
 
 <h3>Missing Values Indicators and MVP</h3>
 
+<p>There are only 8 variables in the data set with truly missing data. Surprisingly there are only 8 patterns of missingness, suggesting the data are not missing at random. Indeed, those rows with missing values for <strong>feat20</strong> are also missing <strong>feat21</strong> and <strong>feat22</strong>. Similarly, <strong>feat44</strong>, <strong>feat45</strong>, and <strong>feat46</strong> are missing values in the same rows. A table summarizing missing values is presented in Appendix 1. Having a missing value indicator for each of the 8 variables with missing values would increase the number of predictors to be considered by 8. Using 7 dummy variables to represent the 8 missing value patterns will reduce that by one, so I choose to represent missingness in this manner.</p>
+
 <h3>Missing Value Imputation</h3>
+
+<p><img src="data:image/png;base64,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" alt=""/> <img src="data:image/png;base64,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" alt=""/> </p>
+
+<p>The variables I consider possibly left censored are <strong>feat10</strong>, <strong>feat34</strong>, <strong>feat44</strong>, <strong>feat46</strong>, <strong>feat59</strong>, <strong>feat60</strong>, <strong>feat65</strong>, <strong>feat73</strong>, <strong>feat77</strong></p>
+
+<p>Those that are possibly right-censored are <strong>feat26</strong>, <strong>feat27</strong>, <strong>feat28</strong>, <strong>feat45</strong>, <strong>feat53</strong>, <strong>feat54</strong>, <strong>feat61</strong>, <strong>feat67</strong>, <strong>feat78</strong>, </p>
+
+<p>Some variables also look to be censored on both the left and right side. These are <strong>feat3</strong>, <strong>feat68</strong>, </p>
+
+<p>Others that may be censored in some other way are <strong>feat11</strong>, <strong>feat13</strong>, <strong>feat14</strong>, <strong>feat15</strong>, <strong>feat20</strong>, <strong>feat21</strong>, <strong>feat37</strong>, <strong>feat38</strong>, <strong>feat39</strong>, <strong>feat40</strong>, <strong>feat41</strong>, <strong>feat42</strong>, <strong>feat62</strong>, <strong>feat63</strong>, <strong>feat72</strong>, <strong>feat74</strong></p>
 
 <h3>Transformations</h3>
 
@@ -329,7 +347,375 @@ hljs.initHighlightingOnLoad();
 
 <hr/>
 
-<h2>Works Cited</h2>
+<h2>Appendices</h2>
+
+<h3>Tables</h3>
+
+<table><thead>
+<tr>
+<th align="center">Variable</th>
+<th align="center">% 0&#39;s</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">exampleid</td>
+<td align="center">0%</td>
+</tr>
+<tr>
+<td align="center">target</td>
+<td align="center">50.3%</td>
+</tr>
+<tr>
+<td align="center">feat1</td>
+<td align="center">84.6%</td>
+</tr>
+<tr>
+<td align="center">feat2</td>
+<td align="center">87.2%</td>
+</tr>
+<tr>
+<td align="center">feat3</td>
+<td align="center">84.6%</td>
+</tr>
+<tr>
+<td align="center">feat4</td>
+<td align="center">84.6%</td>
+</tr>
+<tr>
+<td align="center">feat5</td>
+<td align="center">89.6%</td>
+</tr>
+<tr>
+<td align="center">feat6</td>
+<td align="center">91.8%</td>
+</tr>
+<tr>
+<td align="center">feat7</td>
+<td align="center">89.6%</td>
+</tr>
+<tr>
+<td align="center">feat8</td>
+<td align="center">89.6%</td>
+</tr>
+<tr>
+<td align="center">feat9</td>
+<td align="center">1.3%</td>
+</tr>
+<tr>
+<td align="center">feat10</td>
+<td align="center">9.3%</td>
+</tr>
+<tr>
+<td align="center">feat11</td>
+<td align="center">1.3%</td>
+</tr>
+<tr>
+<td align="center">feat12</td>
+<td align="center">1.3%</td>
+</tr>
+<tr>
+<td align="center">feat13</td>
+<td align="center">0%</td>
+</tr>
+<tr>
+<td align="center">feat14</td>
+<td align="center">1.8%</td>
+</tr>
+<tr>
+<td align="center">feat15</td>
+<td align="center">11.7%</td>
+</tr>
+<tr>
+<td align="center">feat16</td>
+<td align="center">48.4%</td>
+</tr>
+<tr>
+<td align="center">feat17</td>
+<td align="center">84.5%</td>
+</tr>
+<tr>
+<td align="center">feat18</td>
+<td align="center">84.5%</td>
+</tr>
+<tr>
+<td align="center">feat19</td>
+<td align="center">0%</td>
+</tr>
+<tr>
+<td align="center">feat20</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">feat21</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">feat22</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">feat23</td>
+<td align="center">0%</td>
+</tr>
+<tr>
+<td align="center">feat24</td>
+<td align="center">1.8%</td>
+</tr>
+<tr>
+<td align="center">feat25</td>
+<td align="center">11.7%</td>
+</tr>
+<tr>
+<td align="center">feat26</td>
+<td align="center">39.9%</td>
+</tr>
+<tr>
+<td align="center">feat27</td>
+<td align="center">39.9%</td>
+</tr>
+<tr>
+<td align="center">feat28</td>
+<td align="center">39.9%</td>
+</tr>
+<tr>
+<td align="center">feat29</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">feat30</td>
+<td align="center">59.9%</td>
+</tr>
+<tr>
+<td align="center">feat31</td>
+<td align="center">39.9%</td>
+</tr>
+<tr>
+<td align="center">feat32</td>
+<td align="center">56.1%</td>
+</tr>
+<tr>
+<td align="center">feat33</td>
+<td align="center">41.6%</td>
+</tr>
+<tr>
+<td align="center">feat34</td>
+<td align="center">39.9%</td>
+</tr>
+<tr>
+<td align="center">feat35</td>
+<td align="center">97.6%</td>
+</tr>
+<tr>
+<td align="center">feat36</td>
+<td align="center">97.7%</td>
+</tr>
+<tr>
+<td align="center">feat37</td>
+<td align="center">97.6%</td>
+</tr>
+<tr>
+<td align="center">feat38</td>
+<td align="center">97.6%</td>
+</tr>
+<tr>
+<td align="center">feat39</td>
+<td align="center">97.6%</td>
+</tr>
+<tr>
+<td align="center">feat40</td>
+<td align="center">97.6%</td>
+</tr>
+<tr>
+<td align="center">feat41</td>
+<td align="center">97.6%</td>
+</tr>
+<tr>
+<td align="center">feat42</td>
+<td align="center">97.6%</td>
+</tr>
+<tr>
+<td align="center">feat43</td>
+<td align="center">39.9%</td>
+</tr>
+<tr>
+<td align="center">feat44</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">feat45</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">feat46</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">feat52</td>
+<td align="center">62.8%</td>
+</tr>
+<tr>
+<td align="center">feat53</td>
+<td align="center">62.8%</td>
+</tr>
+<tr>
+<td align="center">feat54</td>
+<td align="center">62.8%</td>
+</tr>
+<tr>
+<td align="center">feat55</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">feat56</td>
+<td align="center">62.8%</td>
+</tr>
+<tr>
+<td align="center">feat57</td>
+<td align="center">73.1%</td>
+</tr>
+<tr>
+<td align="center">feat58</td>
+<td align="center">64%</td>
+</tr>
+<tr>
+<td align="center">feat59</td>
+<td align="center">62.8%</td>
+</tr>
+<tr>
+<td align="center">feat60</td>
+<td align="center">62.8%</td>
+</tr>
+<tr>
+<td align="center">feat61</td>
+<td align="center">62.8%</td>
+</tr>
+<tr>
+<td align="center">feat62</td>
+<td align="center">62.8%</td>
+</tr>
+<tr>
+<td align="center">feat63</td>
+<td align="center">71.9%</td>
+</tr>
+<tr>
+<td align="center">feat64</td>
+<td align="center">9.5%</td>
+</tr>
+<tr>
+<td align="center">feat65</td>
+<td align="center">9.5%</td>
+</tr>
+<tr>
+<td align="center">feat66</td>
+<td align="center">9.5%</td>
+</tr>
+<tr>
+<td align="center">feat67</td>
+<td align="center">9.5%</td>
+</tr>
+<tr>
+<td align="center">feat68</td>
+<td align="center">40.8%</td>
+</tr>
+<tr>
+<td align="center">feat69</td>
+<td align="center">40.8%</td>
+</tr>
+<tr>
+<td align="center">feat70</td>
+<td align="center">40.8%</td>
+</tr>
+<tr>
+<td align="center">feat71</td>
+<td align="center">40.8%</td>
+</tr>
+<tr>
+<td align="center">feat72</td>
+<td align="center">91.2%</td>
+</tr>
+<tr>
+<td align="center">feat73</td>
+<td align="center">92.2%</td>
+</tr>
+<tr>
+<td align="center">feat74</td>
+<td align="center">91.2%</td>
+</tr>
+<tr>
+<td align="center">feat75</td>
+<td align="center">91.2%</td>
+</tr>
+<tr>
+<td align="center">feat76</td>
+<td align="center">91.2%</td>
+</tr>
+<tr>
+<td align="center">feat77</td>
+<td align="center">91.2%</td>
+</tr>
+<tr>
+<td align="center">feat78</td>
+<td align="center">91.2%</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th align="center">Variable</th>
+<th align="center">% Missing</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="center">feat20</td>
+<td align="center">68.4</td>
+</tr>
+<tr>
+<td align="center">feat21</td>
+<td align="center">68.4</td>
+</tr>
+<tr>
+<td align="center">feat22</td>
+<td align="center">68.4</td>
+</tr>
+<tr>
+<td align="center">feat29</td>
+<td align="center">60.12</td>
+</tr>
+<tr>
+<td align="center">feat44</td>
+<td align="center">28.94</td>
+</tr>
+<tr>
+<td align="center">feat45</td>
+<td align="center">28.94</td>
+</tr>
+<tr>
+<td align="center">feat46</td>
+<td align="center">28.94</td>
+</tr>
+<tr>
+<td align="center">feat55</td>
+<td align="center">37.2</td>
+</tr>
+</tbody></table>
+
+<h3>Works Cited</h3>
+
+<p>Lee L (2013). <em>NADA: Nondetects And Data Analysis for
+environmental data</em>. R package version 1.5-6, <URL:
+http://CRAN.R-project.org/package=NADA>.</p>
+
+<p>Therneau TM (2014). <em>A Package for Survival Analysis in S</em>. R
+package version 2.37-7, <URL:
+http://CRAN.R-project.org/package=survival>.</p>
+
+<p>Terry M. Therneau and Patricia M. Grambsch (2000). <em>Modeling
+Survival Data: Extending the Cox Model</em>. Springer, New York. ISBN
+0-387-98784-3.</p>
+
+<p>R Core Team (2013). <em>R: A Language and Environment for Statistical
+Computing</em>. R Foundation for Statistical Computing, Vienna,
+Austria. <URL: http://www.R-project.org/>.</p>
 
 <p>Dowle M, Short T, Srinivasan SLwcfA and Saporta R (2013).
 <em>data.table: Extension of data.frame for fast indexing, fast
@@ -393,19 +779,20 @@ Austria. <URL: http://www.R-project.org/>.</p>
 
 <hr/>
 
-<h2>Appendix with R code</h2>
+<h3>R code</h3>
 
 <pre><code class="r"># Clear working environment
 rm(list = ls())
 
 # Options for document compilation
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, comment = NA, 
-    fig.height = 8, fig.width = 7, fig.cap = &quot;&quot;, results = &quot;hide&quot;)
+    fig.height = 3, fig.width = 4, fig.cap = &quot;&quot;, results = &quot;hide&quot;)
 
 # Set table options for neat tables
 library(pander)
 panderOptions(&quot;table.split.table&quot;, 120)
 panderOptions(&quot;table.split.cells&quot;, 30)
+panderOptions(&quot;table.style&quot;, &quot;rmarkdown&quot;)
 
 # Globally set plot parameters
 library(ggplot2)
@@ -415,6 +802,14 @@ theme_update(panel.grid.major = element_line(colour = &quot;#CCCCCC&quot;, size 
 
 library(data.table)
 train &lt;- fread(&quot;C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Data/WANGphy_train.csv&quot;)
+zerotable &lt;- fread(&quot;C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Zeros.csv&quot;)
+zerotable &lt;- zerotable[, `:=`(x, paste0(x, &quot;%&quot;))]
+zerotable &lt;- zerotable[x == &quot;NA%&quot;, `:=`(x, &quot;N/A&quot;)]
+setnames(zerotable, c(&quot;Variable&quot;, &quot;% 0&#39;s&quot;))
+pander(zerotable)
+misstable &lt;- fread(&quot;C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Missing.csv&quot;)
+setnames(misstable, c(&quot;Variable&quot;, &quot;% Missing&quot;))
+pander(misstable)
 # Create bibliography to cite packages used
 allLibs &lt;- .packages()
 library(knitcitations)
@@ -457,6 +852,43 @@ mytable &lt;- data.frame(Cardinality = mylengths[varsEffected])
 mytable$Class &lt;- with(mytable, ifelse(Cardinality == 2, &quot;Nominal&quot;, &quot;Ordinal&quot;))
 library(pander)
 pander(mytable, style = &quot;rmarkdown&quot;)
+myzeros &lt;- round(sapply(train, function(x) 100 * sum(x == 0)/length(x)), 1)
+write.csv(myzeros, file = &quot;C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Zeros.csv&quot;)
+ggplot(train, aes(x = feat44, fill = target)) + geom_bar()
+mymissing &lt;- sapply(train, function(x) 100 * sum(is.na(x))/length(x))  # only 8 variables with missing
+mymissing &lt;- mymissing[mymissing &gt; 0]
+write.csv(mymissing, file = &quot;C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Missing.csv&quot;)
+# create missing value indicators
+train[, `:=`(Mfeat20, as.numeric(is.na(feat20)))]
+train[, `:=`(Mfeat29, as.numeric(is.na(feat29)))]
+train[, `:=`(Mfeat44, as.numeric(is.na(feat44)))]
+train[, `:=`(Mfeat55, as.numeric(is.na(feat55)))]
+
+train$MVP &lt;- factor(with(train, paste0(Mfeat20, Mfeat29, Mfeat44, Mfeat55)))
+
+train[, `:=`(Mfeat20, NULL)]
+train[, `:=`(Mfeat29, NULL)]
+train[, `:=`(Mfeat44, NULL)]
+train[, `:=`(Mfeat55, NULL)]
+# take only those where target=1
+tmp &lt;- train[target == 0 &amp; !is.na(feat44), list(exampleid, target, feat44)]
+ggplot(tmp, aes(x = feat44, fill = target)) + geom_bar() + ggtitle(&quot;Before Imputation&quot;) + 
+    guides(fill = F)
+
+library(NADA)
+test &lt;- cenfit(obs = tmp[, feat44], censored = tmp[, feat44 == 0])
+mymean &lt;- mean(test)[&quot;mean&quot;]  # estimated mean
+mymin &lt;- tmp[feat44 != 0, min(feat44)]  # min with 0&#39;s removed
+mydiff &lt;- abs(mymean - mymin)  # mean - min
+myn &lt;- sum(tmp$feat44 == 0)  # how many values to bootstrap
+mysamp &lt;- sample(tmp[feat44 &gt;= (mymean + mydiff), feat44], myn, replace = T)  # sample the right side of my distribution
+myimp &lt;- mymean - abs(mymean - mysamp)  # flip sample values over the mean
+tmp[, `:=`(Ifeat44, F)]
+tmp[feat44 == 0, `:=`(Ifeat44, T)]  # mark those I am about to replace with imputed values
+tmp[feat44 == 0, `:=`(feat44, myimp)]  # replace 0&#39;s with values
+
+ggplot(tmp, aes(x = feat44, fill = Ifeat44)) + geom_bar() + geom_vline(xintercept = mymin) + 
+    ggtitle(&quot;After Imputation&quot;) + guides(fill = F)
 </code></pre>
 
 </body>

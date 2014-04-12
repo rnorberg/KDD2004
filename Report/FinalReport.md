@@ -4,7 +4,7 @@ Author: Robert Norberg
 
 Due: April 23, 2014
 
-Date Ran: April 09, 2014
+Date Ran: April 11, 2014
 
 ----
 
@@ -59,19 +59,53 @@ The variables effected are summarized in the table below.
 |  **feat76**  |       4       | Ordinal |
 
 
-I noticed several variables that had a very large number of 0 values. It seems that in some cases variables were given a value of 0 instead of a missing value. Take for example **feat26** whose distribution is shown below.
+I noticed several variables that had a very large number of 0 values. It seems that a 0 value has some special significance for many of the variables.
 
-![Distribution of feat26](C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Figures/Exploratory/feat26.png)
-
-Other variables 
+The percentage of zeros in each variable is presented in Appendix 1.
 
 
 
+
+I suspect that many of the variables are censored and 0 is used to represent "greater than the detection limit" or "less than the detection limit" or something similar. Censored data is a common phenomenon in biological data. Survival analysis typically deals with right censored data because the lifespan of organisms still living at the end of the study period is partially unknown. Analysis of chemical concentrations often deals with left censored data because when the concentration of a chemical drops below a certain point the lab can no longer detect it. 
+
+Take for example a plot of **feat44**. This looks like a classic case of left-censored data. 
+
+![](figure/unnamed-chunk-14.png) 
+
+
+I will treat these 0's as potentially missing data. 
 
 
 ### Missing Values Indicators and MVP
 
+
+
+
+
+There are only 8 variables in the data set with truly missing data. Surprisingly there are only 8 patterns of missingness, suggesting the data are not missing at random. Indeed, those rows with missing values for **feat20** are also missing **feat21** and **feat22**. Similarly, **feat44**, **feat45**, and **feat46** are missing values in the same rows. A table summarizing missing values is presented in Appendix 1. Having a missing value indicator for each of the 8 variables with missing values would increase the number of predictors to be considered by 8. Using 7 dummy variables to represent the 8 missing value patterns will reduce that by one, so I choose to represent missingness in this manner.
+
+
+
+
+
 ### Missing Value Imputation 
+
+
+
+
+![](figure/unnamed-chunk-171.png) ![](figure/unnamed-chunk-172.png) 
+
+
+
+
+The variables I consider possibly left censored are **feat10**, **feat34**, **feat44**, **feat46**, **feat59**, **feat60**, **feat65**, **feat73**, **feat77**
+
+Those that are possibly right-censored are **feat26**, **feat27**, **feat28**, **feat45**, **feat53**, **feat54**, **feat61**, **feat67**, **feat78**, 
+
+Some variables also look to be censored on both the left and right side. These are **feat3**, **feat68**, 
+
+Others that may be censored in some other way are **feat11**, **feat13**, **feat14**, **feat15**, **feat20**, **feat21**, **feat37**, **feat38**, **feat39**, **feat40**, **feat41**, **feat42**, **feat62**, **feat63**, **feat72**, **feat74**
+
 
 ### Transformations 
 
@@ -97,7 +131,128 @@ Other variables
 
 -----
 
-## Works Cited
+## Appendices
+
+### Tables
+
+
+
+
+
+|  Variable  |  % 0's  |
+|:----------:|:-------:|
+| exampleid  |   0%    |
+|   target   |  50.3%  |
+|   feat1    |  84.6%  |
+|   feat2    |  87.2%  |
+|   feat3    |  84.6%  |
+|   feat4    |  84.6%  |
+|   feat5    |  89.6%  |
+|   feat6    |  91.8%  |
+|   feat7    |  89.6%  |
+|   feat8    |  89.6%  |
+|   feat9    |  1.3%   |
+|   feat10   |  9.3%   |
+|   feat11   |  1.3%   |
+|   feat12   |  1.3%   |
+|   feat13   |   0%    |
+|   feat14   |  1.8%   |
+|   feat15   |  11.7%  |
+|   feat16   |  48.4%  |
+|   feat17   |  84.5%  |
+|   feat18   |  84.5%  |
+|   feat19   |   0%    |
+|   feat20   |   N/A   |
+|   feat21   |   N/A   |
+|   feat22   |   N/A   |
+|   feat23   |   0%    |
+|   feat24   |  1.8%   |
+|   feat25   |  11.7%  |
+|   feat26   |  39.9%  |
+|   feat27   |  39.9%  |
+|   feat28   |  39.9%  |
+|   feat29   |   N/A   |
+|   feat30   |  59.9%  |
+|   feat31   |  39.9%  |
+|   feat32   |  56.1%  |
+|   feat33   |  41.6%  |
+|   feat34   |  39.9%  |
+|   feat35   |  97.6%  |
+|   feat36   |  97.7%  |
+|   feat37   |  97.6%  |
+|   feat38   |  97.6%  |
+|   feat39   |  97.6%  |
+|   feat40   |  97.6%  |
+|   feat41   |  97.6%  |
+|   feat42   |  97.6%  |
+|   feat43   |  39.9%  |
+|   feat44   |   N/A   |
+|   feat45   |   N/A   |
+|   feat46   |   N/A   |
+|   feat52   |  62.8%  |
+|   feat53   |  62.8%  |
+|   feat54   |  62.8%  |
+|   feat55   |   N/A   |
+|   feat56   |  62.8%  |
+|   feat57   |  73.1%  |
+|   feat58   |   64%   |
+|   feat59   |  62.8%  |
+|   feat60   |  62.8%  |
+|   feat61   |  62.8%  |
+|   feat62   |  62.8%  |
+|   feat63   |  71.9%  |
+|   feat64   |  9.5%   |
+|   feat65   |  9.5%   |
+|   feat66   |  9.5%   |
+|   feat67   |  9.5%   |
+|   feat68   |  40.8%  |
+|   feat69   |  40.8%  |
+|   feat70   |  40.8%  |
+|   feat71   |  40.8%  |
+|   feat72   |  91.2%  |
+|   feat73   |  92.2%  |
+|   feat74   |  91.2%  |
+|   feat75   |  91.2%  |
+|   feat76   |  91.2%  |
+|   feat77   |  91.2%  |
+|   feat78   |  91.2%  |
+
+
+
+
+
+
+|  Variable  |  % Missing  |
+|:----------:|:-----------:|
+|   feat20   |    68.4     |
+|   feat21   |    68.4     |
+|   feat22   |    68.4     |
+|   feat29   |    60.12    |
+|   feat44   |    28.94    |
+|   feat45   |    28.94    |
+|   feat46   |    28.94    |
+|   feat55   |    37.2     |
+
+
+
+
+### Works Cited
+
+Lee L (2013). _NADA: Nondetects And Data Analysis for
+environmental data_. R package version 1.5-6, <URL:
+http://CRAN.R-project.org/package=NADA>.
+
+Therneau TM (2014). _A Package for Survival Analysis in S_. R
+package version 2.37-7, <URL:
+http://CRAN.R-project.org/package=survival>.
+
+Terry M. Therneau and Patricia M. Grambsch (2000). _Modeling
+Survival Data: Extending the Cox Model_. Springer, New York. ISBN
+0-387-98784-3.
+
+R Core Team (2013). _R: A Language and Environment for Statistical
+Computing_. R Foundation for Statistical Computing, Vienna,
+Austria. <URL: http://www.R-project.org/>.
 
 Dowle M, Short T, Srinivasan SLwcfA and Saporta R (2013).
 _data.table: Extension of data.frame for fast indexing, fast
@@ -162,7 +317,7 @@ Austria. <URL: http://www.R-project.org/>.
 
 -----
 
-## Appendix with R code
+### R code
 
 
 ```r
@@ -171,12 +326,13 @@ rm(list = ls())
 
 # Options for document compilation
 opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, comment = NA, 
-    fig.height = 8, fig.width = 7, fig.cap = "", results = "hide")
+    fig.height = 3, fig.width = 4, fig.cap = "", results = "hide")
 
 # Set table options for neat tables
 library(pander)
 panderOptions("table.split.table", 120)
 panderOptions("table.split.cells", 30)
+panderOptions("table.style", "rmarkdown")
 
 # Globally set plot parameters
 library(ggplot2)
@@ -186,6 +342,14 @@ theme_update(panel.grid.major = element_line(colour = "#CCCCCC", size = 0.3),
 
 library(data.table)
 train <- fread("C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Data/WANGphy_train.csv")
+zerotable <- fread("C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Zeros.csv")
+zerotable <- zerotable[, `:=`(x, paste0(x, "%"))]
+zerotable <- zerotable[x == "NA%", `:=`(x, "N/A")]
+setnames(zerotable, c("Variable", "% 0's"))
+pander(zerotable)
+misstable <- fread("C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Missing.csv")
+setnames(misstable, c("Variable", "% Missing"))
+pander(misstable)
 # Create bibliography to cite packages used
 allLibs <- .packages()
 library(knitcitations)
@@ -228,5 +392,42 @@ mytable <- data.frame(Cardinality = mylengths[varsEffected])
 mytable$Class <- with(mytable, ifelse(Cardinality == 2, "Nominal", "Ordinal"))
 library(pander)
 pander(mytable, style = "rmarkdown")
+myzeros <- round(sapply(train, function(x) 100 * sum(x == 0)/length(x)), 1)
+write.csv(myzeros, file = "C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Zeros.csv")
+ggplot(train, aes(x = feat44, fill = target)) + geom_bar()
+mymissing <- sapply(train, function(x) 100 * sum(is.na(x))/length(x))  # only 8 variables with missing
+mymissing <- mymissing[mymissing > 0]
+write.csv(mymissing, file = "C:/Users/Robert/cloud/Classes/Data Prep/Final Project/Percent Missing.csv")
+# create missing value indicators
+train[, `:=`(Mfeat20, as.numeric(is.na(feat20)))]
+train[, `:=`(Mfeat29, as.numeric(is.na(feat29)))]
+train[, `:=`(Mfeat44, as.numeric(is.na(feat44)))]
+train[, `:=`(Mfeat55, as.numeric(is.na(feat55)))]
+
+train$MVP <- factor(with(train, paste0(Mfeat20, Mfeat29, Mfeat44, Mfeat55)))
+
+train[, `:=`(Mfeat20, NULL)]
+train[, `:=`(Mfeat29, NULL)]
+train[, `:=`(Mfeat44, NULL)]
+train[, `:=`(Mfeat55, NULL)]
+# take only those where target=1
+tmp <- train[target == 0 & !is.na(feat44), list(exampleid, target, feat44)]
+ggplot(tmp, aes(x = feat44, fill = target)) + geom_bar() + ggtitle("Before Imputation") + 
+    guides(fill = F)
+
+library(NADA)
+test <- cenfit(obs = tmp[, feat44], censored = tmp[, feat44 == 0])
+mymean <- mean(test)["mean"]  # estimated mean
+mymin <- tmp[feat44 != 0, min(feat44)]  # min with 0's removed
+mydiff <- abs(mymean - mymin)  # mean - min
+myn <- sum(tmp$feat44 == 0)  # how many values to bootstrap
+mysamp <- sample(tmp[feat44 >= (mymean + mydiff), feat44], myn, replace = T)  # sample the right side of my distribution
+myimp <- mymean - abs(mymean - mysamp)  # flip sample values over the mean
+tmp[, `:=`(Ifeat44, F)]
+tmp[feat44 == 0, `:=`(Ifeat44, T)]  # mark those I am about to replace with imputed values
+tmp[feat44 == 0, `:=`(feat44, myimp)]  # replace 0's with values
+
+ggplot(tmp, aes(x = feat44, fill = Ifeat44)) + geom_bar() + geom_vline(xintercept = mymin) + 
+    ggtitle("After Imputation") + guides(fill = F)
 ```
 
